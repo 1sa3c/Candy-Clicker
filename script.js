@@ -26,8 +26,8 @@ upgradeClickBtn.addEventListener("click", buyClickUpgrade);
 
 //function that adds candy to our total based on candy/click number, so long as we have less than 5000 candies
 function addCandy(){
-   totalCandy += 1
-   totalCandyDisplay.innerHTML = totalCandy;
+   totalCandy += candyPerClick;
+   totalCandyDisplay.innerHTML = "candy: " + totalCandy;
 }
 
 //check to see if we can buy an upgrade, so we can grey out or brighten purchase button. adds or removes special css classes
@@ -37,4 +37,12 @@ function canUserIncreaseClick(){
 
 //buy a click upgrade if we have enough coins. also used Math.trunc to remove pesky decimals
 function buyClickUpgrade(){
+   if(totalCandy >= clickUpgradeCost){
+      totalCandy -= clickUpgradeCost;
+      totalCandyDisplay.innerHTML = "candies: " + totalCandy;
+      candyPerClick += 5;
+      candyPerClickDisplay.innerHTML = "candies/click " + candyPerClick;
+      clickUpgradeCost = Math.round(clickUpgradeCost *= 1.5);
+      upgradeClickBtn.innerHTML = "Get 5 more candies/click for " + clickUpgradeCost + " candies";
+   }
 }
